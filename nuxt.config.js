@@ -1,4 +1,4 @@
-const pkg = require('./package')
+const pkg = require('./package');
 
 module.exports = {
   mode: 'universal',
@@ -7,11 +7,11 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
+      { hid: 'description', name: 'description', content: pkg.description },
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+    ],
   },
 
   loading: { color: '#fff' },
@@ -20,9 +20,16 @@ module.exports = {
   plugins: [
   ],
   modules: [
+    '@nuxtjs/vuetify',
   ],
+  vuetify: {
+    theme: {
+      primary: '#00afa0',
+      secondary: '#f1a852',
+    },
+  },
   build: {
     extend(config, ctx) {
-    }
-  }
-}
+    },
+  },
+};

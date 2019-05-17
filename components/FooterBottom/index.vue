@@ -1,0 +1,10 @@
+<template>
+  <v-footer
+    height="auto"
+    color="secondary"
+  >
+    <v-container>
+      test
+    </v-container>
+  </v-footer>
+</template>

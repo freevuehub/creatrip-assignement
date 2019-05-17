@@ -1,9 +1,23 @@
 <template>
-  <div class="container">
-    <h1 class="title">
-      Creatrip Assignement
-    </h1>
-  </div>
+  <v-container>
+    <v-layout
+      wrap
+      row
+    >
+      <v-flex
+        md6
+        xs12
+      >
+        <h1>content</h1>
+      </v-flex>
+      <v-flex
+        md6
+        xs12
+      >
+        <h1>content</h1>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -11,19 +25,3 @@ export default {
   name: 'Main',
 };
 </script>
-
-<style>
-    .container {
-        margin: 0 auto;
-        min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
-    .title {
-        display: block;
-        font-family: 'Source Sans Pro', sans-serif;
-        font-size: 42px;
-    }
-</style>

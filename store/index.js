@@ -1,9 +1,9 @@
-import Vuex from 'vuex';
-
-const Store = new Vuex({
-  state: {
-    test: null,
-  },
+export const state = () => ({
+  test: null,
 });
 
-export default Store;
+export const getters = {
+  getTest(state) {
+    return state.test;
+  },
+};
