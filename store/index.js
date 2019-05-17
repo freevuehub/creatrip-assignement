@@ -1,19 +1,22 @@
 export const state = () => ({
-  items: [],
-  test: null,
+  items: {},
+  users: [],
 });
 
 export const mutations = {
-  fetchItems(state, payload) {
-    state = {
-      ...state,
-      items: payload.data,
-    };
+  SET_ITEMS(state, payload) {
+    state.items = payload.data;
+  },
+  SET_USERS(state, payload) {
+    state.users = payload.data;
   },
 };
 
 export const getters = {
-  getTest(state) {
-    return state.test;
+  getItems(state) {
+    return state.items;
+  },
+  getUsers(state) {
+    return state.users;
   },
 };

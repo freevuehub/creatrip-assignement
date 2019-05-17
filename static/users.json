@@ -1,0 +1,26 @@
+[
+  {
+    "idx": 1,
+    "name": "Foo"
+  },
+  {
+    "idx": 2,
+    "name": "Bar"
+  },
+  {
+    "idx": 3,
+    "name": "Nuxt"
+  },
+  {
+    "idx": 4,
+    "name": "FreeVue"
+  },
+  {
+    "idx": 5,
+    "name": "Vue"
+  },
+  {
+    "idx": 6,
+    "name": "React"
+  }
+]
