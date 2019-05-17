@@ -21,8 +21,15 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: 'Main',
   layout: 'default',
+  async created() {
+    const { data } = await axios.get('/items.json');
+
+    this.$store.commit('fetchItems', { data });
+  },
 };
 </script>
