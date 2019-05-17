@@ -16,6 +16,7 @@ module.exports = {
 
   loading: { color: '#fff' },
   css: [
+    '@fortawesome/fontawesome-free/css/all.css',
   ],
   plugins: [
   ],
@@ -27,6 +28,7 @@ module.exports = {
       primary: '#00afa0',
       secondary: '#f1a852',
     },
+    iconfont: 'fa',
   },
   build: {
     extend(config, ctx) {
