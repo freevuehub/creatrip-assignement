@@ -1,5 +1,6 @@
 <template>
   <v-toolbar
+    dark
     color="primary"
     dense
   >

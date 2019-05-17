@@ -23,5 +23,6 @@
 <script>
 export default {
   name: 'Main',
+  layout: 'default',
 };
 </script>
