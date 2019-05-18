@@ -3,6 +3,7 @@ import FooterBottom from './FooterBottom';
 import UserList from './UserList';
 import ItemCell from './ItemCell';
 import ItemDefault from './ItemDefault';
+import ItemDetail from './ItemDetail';
 
 export {
   HeaderNav,
@@ -10,4 +11,5 @@ export {
   UserList,
   ItemCell,
   ItemDefault,
+  ItemDetail,
 };

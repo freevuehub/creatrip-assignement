@@ -20,6 +20,9 @@ export const mutations = {
         return state.users;
     }
   },
+  DELETE_USER(state, payload) {
+    state.users = state.users.filter(l => l.idx !== parseInt(payload.idx));
+  },
 };
 
 export const getters = {

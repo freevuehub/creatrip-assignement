@@ -16,41 +16,7 @@
         xs12
         class="pa-2"
       >
-        <v-card
-          flat
-          class="pa-2"
-        >
-          <v-subheader>
-            User's Item
-            <v-spacer></v-spacer>
-            <v-btn
-              icon
-              class="ma-0 pa-0"
-              small
-            >
-              <v-icon
-                size="17"
-                class="primary--text"
-              >
-                fas fa-edit
-              </v-icon>
-            </v-btn>
-            <v-btn
-              icon
-              class="ma-0 pa-0"
-              small
-            >
-              <v-icon
-                size="17"
-                class="red--text"
-              >
-                fas fa-trash-alt
-              </v-icon>
-            </v-btn>
-          </v-subheader>
-          <nuxt-child v-if="$route.name !== 'index'" />
-          <item-default v-else />
-        </v-card>
+        <item-detail />
       </v-flex>
     </v-layout>
   </v-container>
@@ -59,12 +25,12 @@
 <script>
 import { mapGetters } from 'vuex';
 import axios from 'axios';
-import { UserList, ItemDefault } from '~/components';
+import { UserList, ItemDetail } from '~/components';
 
 export default {
   name: 'Main',
   layout: 'default',
-  components: { UserList, ItemDefault },
+  components: { UserList, ItemDetail },
   computed: {
     ...mapGetters(['getUsers']),
   },
