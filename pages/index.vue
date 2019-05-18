@@ -43,7 +43,7 @@ export default {
   },
   async created() {
     if (!this.getUsers.length) {
-      const { data } = await axios.get('http://localhost:3000/users.json');
+      const { data } = await axios.get('/users.json');
 
       this.$store.commit('SET_USERS', { data });
     }
