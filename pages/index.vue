@@ -21,7 +21,8 @@
           class="pa-2"
         >
           <v-subheader>User's Item</v-subheader>
-          <nuxt-child />
+          <nuxt-child v-if="$route.name !== 'index'" />
+          <item-default v-else />
         </v-card>
       </v-flex>
     </v-layout>
@@ -30,16 +31,23 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import axios from 'axios';
 
-import { UserList } from '~/components';
+import { UserList, ItemDefault } from '~/components';
 
 export default {
   name: 'Main',
   layout: 'default',
-  middleware: ['users'],
-  components: { UserList },
+  components: { UserList, ItemDefault },
   computed: {
     ...mapGetters(['getUsers']),
+  },
+  async created() {
+    if (!this.getUsers.length) {
+      const { data } = await axios.get('http://localhost:3000/users.json');
+
+      this.$store.commit('SET_USERS', { data });
+    }
   },
 };
 </script>

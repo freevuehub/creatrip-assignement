@@ -9,7 +9,7 @@
       <template v-for="l in snsList">
         <v-btn
           :key="l.link"
-          :to="l.link"
+          :href="l.link"
           target="_blank"
           class="mx-3"
           icon

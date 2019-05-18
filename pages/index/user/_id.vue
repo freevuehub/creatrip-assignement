@@ -3,14 +3,25 @@
     row
     wrap
   >
-    <v-flex xs12>
+    <v-flex
+      class="text-xs-center"
+      xs12
+    >
       <img
         v-show="imgLoad"
-        @load="imgLoad = true"
+        @load="getImage()"
         style="display: block; width: 100%;"
         :src="getItems.image_path"
         :alt="`${getItems.name}'s Image`"
       >
+      <v-progress-circular
+        class="my-4"
+        :width="3"
+        :size="50"
+        v-if="!imgLoad"
+        color="primary"
+        indeterminate
+      ></v-progress-circular>
       <v-divider class="my-2" />
     </v-flex>
     <v-flex
@@ -35,6 +46,7 @@ import { mapGetters } from 'vuex';
 import { ItemCell } from '~/components';
 
 export default {
+  name: 'Item',
   middleware: ['items'],
   components: { ItemCell },
   data: () => ({
@@ -42,6 +54,13 @@ export default {
   }),
   computed: {
     ...mapGetters(['getItems']),
+  },
+  methods: {
+    getImage() {
+      setTimeout(() => {
+        this.imgLoad = true;
+      }, 300);
+    },
   },
 };
 </script>
