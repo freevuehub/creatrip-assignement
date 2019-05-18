@@ -15,6 +15,7 @@
           <v-icon
             size="17"
             class="primary--text"
+            @click="$store.commit('SET_EDITING')"
           >
             fas fa-edit
           </v-icon>
