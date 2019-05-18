@@ -7,31 +7,22 @@
       <v-flex
         md6
         xs12
+        class="pa-2"
+      >
+        <user-list :data="getUsers" />
+      </v-flex>
+      <v-flex
+        md6
+        xs12
+        class="pa-2"
       >
         <v-card
           flat
           class="pa-2"
         >
-          <v-subheader>Users</v-subheader>
-          <v-list>
-            <template v-for="l in getUsers">
-              <user-list
-                :key="l.idx"
-                :item="l"
-              />
-              <v-divider
-                :key="l.idx"
-                class="my-2"
-              ></v-divider>
-            </template>
-          </v-list>
+          <v-subheader>User's Item</v-subheader>
+          <nuxt-child />
         </v-card>
-      </v-flex>
-      <v-flex
-        md6
-        xs12
-      >
-        <h1>content</h1>
       </v-flex>
     </v-layout>
   </v-container>

@@ -1,25 +1,32 @@
 <template>
-  <v-list-tile
-    avatar
-    :to="`/${item.idx}`"
+  <v-card
+    flat
+    class="pa-2"
   >
-    <list-avatar>{{ item.name.split('')[0] }}</list-avatar>
-    <list-content>{{ item.name }}</list-content>
-    <v-list-tile-action>
-      <v-icon size="18">fas fa-chevron-right</v-icon>
-    </v-list-tile-action>
-  </v-list-tile>
+    <v-subheader>Users</v-subheader>
+    <v-list>
+      <template v-for="l in data">
+        <list-item
+          :key="l.idx"
+          :item="l"
+        />
+        <v-divider
+          :key="`${l.idx} divider`"
+          class="my-2"
+        ></v-divider>
+      </template>
+    </v-list>
+  </v-card>
 </template>
 
 <script>
-import ListAvatar from './ListAvatar';
-import ListContent from './ListContent';
+import ListItem from './ListItem';
 
 export default {
   name: 'UserList',
-  components: { ListContent, ListAvatar },
+  components: { ListItem },
   props: {
-    item: Object,
+    data: Array,
   },
 };
 </script>
