@@ -32,7 +32,6 @@
 <script>
 import { mapGetters } from 'vuex';
 import axios from 'axios';
-
 import { UserList, ItemDefault } from '~/components';
 
 export default {

@@ -9,6 +9,9 @@
           <p>해당 페이지는 Vuetify를 사용하여 제작했습니다.</p>
         </li>
         <li>
+          <p>아이콘은 Font-Awesome을 사용했습니다.</p>
+        </li>
+        <li>
           <p>로컬에 JSON파일을 만들어 사용합니다.</p>
         </li>
         <li>
@@ -42,9 +45,3 @@
     </v-flex>
   </v-layout>
 </template>
-
-<script>
-export default {
-  name: 'ItemDefault',
-};
-</script>
