@@ -20,7 +20,34 @@
           flat
           class="pa-2"
         >
-          <v-subheader>User's Item</v-subheader>
+          <v-subheader>
+            User's Item
+            <v-spacer></v-spacer>
+            <v-btn
+              icon
+              class="ma-0 pa-0"
+              small
+            >
+              <v-icon
+                size="17"
+                class="primary--text"
+              >
+                fas fa-edit
+              </v-icon>
+            </v-btn>
+            <v-btn
+              icon
+              class="ma-0 pa-0"
+              small
+            >
+              <v-icon
+                size="17"
+                class="red--text"
+              >
+                fas fa-trash-alt
+              </v-icon>
+            </v-btn>
+          </v-subheader>
           <nuxt-child v-if="$route.name !== 'index'" />
           <item-default v-else />
         </v-card>
@@ -43,7 +70,7 @@ export default {
   },
   async created() {
     if (!this.getUsers.length) {
-      const { data } = await axios.get('/users.json');
+      const { data } = await axios.get('http://localhost:3000/users.json');
 
       this.$store.commit('SET_USERS', { data });
     }
