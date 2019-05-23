@@ -1,89 +1,44 @@
 <template>
-  <v-layout
-    row
-    wrap
+  <v-flex
+    md6
+    xs12
+    class="pa-2"
   >
-    <v-flex
-      class="text-xs-center"
-      xs12
-    >
-      <img
-        v-show="imgLoad"
-        style="display: block; width: 100%;"
-        :src="getItems.image_path"
-        :alt="`${getItems.name}'s Image`"
-        @load="getImage()"
-      >
-      <v-progress-circular
-        v-if="!imgLoad"
-        class="my-4"
-        :width="3"
-        :size="50"
-        color="primary"
-        indeterminate
-      />
-      <v-divider class="my-2" />
-    </v-flex>
-    <v-flex
-      xs12
-      class="pa-2"
-    >
-      <item-cell label="No.">
-        {{ $route.params.id }}
-      </item-cell>
-      <item-cell label="Name:">
-        <template v-if="!getItems.editing">
-          {{ getItems.name }}
-        </template>
-        <v-text-field
-          v-else
-          v-model="name"
-          hide-details
-          solo
-        ></v-text-field>
-      </item-cell>
-      <item-cell label="Description:">
-        {{ getItems.subscript }}
-      </item-cell>
-    </v-flex>
-    <v-flex
-      v-if="getItems.editing"
-      xs12
-      class="text-xs-center"
-    >
-      <v-btn
-        color="primary"
-        @click="$store.commit('SAVE_ITEM', { name })"
-      >
-        SAVE
-      </v-btn>
-    </v-flex>
-  </v-layout>
+    <item-list />
+  </v-flex>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import { ItemCell } from '~/components';
+import { get } from 'axios';
+import { ItemList } from '~/components';
 
 export default {
-  name: 'Item',
-  middleware: ['items'],
-  components: { ItemCell },
-  data: () => ({
-    imgLoad: false,
-    name: '',
-  }),
+  name: 'ItemListView',
+  middleware: ['setUserToStore'],
+  components: { ItemList },
   computed: {
-    ...mapGetters(['getItems']),
+    id: ({ $route }) => parseFloat($route.params.id),
+  },
+  watch: {
+    $route() {
+      this.getItems();
+    },
   },
   created() {
-    this.name = this.getItems.name;
+    this.getItems();
+  },
+  mounted() {
+    console.log(this.$route.query);
   },
   methods: {
-    getImage() {
-      setTimeout(() => {
-        this.imgLoad = true;
-      }, 300);
+    async getItems() {
+      const { data } = await get('http://localhost:3000/items.json');
+
+      const list = data.list.filter(
+        l => l.user_idx === this.id
+      )[0].items;
+
+      this.$store.commit('SET_ITEMS', { data: list });
     },
   },
 };
