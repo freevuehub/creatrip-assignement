@@ -1,55 +1,38 @@
 <template>
   <v-card>
-    <v-toolbar
-      color="primary"
-      flat
-      dense
-      dark
-    >
-      <v-toolbar-title>
-        {{ getItem.item_name }}
-      </v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        :to="`/user/${$route.params.id}`"
-        class="ma-0 pa-0"
-        icon
+    <detail-toolbar :label="getItem.item_name" />
+    <v-container>
+      <v-layout
+        row
+        wrap
       >
-        <v-icon>close</v-icon>
-      </v-btn>
-    </v-toolbar>
-    <v-layout
-      row
-      wrap
-    >
-      <v-flex
-        xs12
-        md6
-        class="pa-2"
-      >
-        <v-card>
-          <v-img :src="getItem.image_path"></v-img>
-        </v-card>
-      </v-flex>
-      <v-flex
-        xs12
-        md6
-        class="pa-2"
-      >
-        {{ getItem.item_name }}
-        {{ getItem.subscript }}
-      </v-flex>
-    </v-layout>
+        <v-flex
+          xs12
+          md6
+          class="pa-2"
+        >
+          <img-card :url="getItem.image_path" />
+        </v-flex>
+        <v-flex
+          xs12
+          md6
+          class="pa-2"
+        >
+          {{ getItem.item_name }}
+          {{ getItem.subscript }}
+        </v-flex>
+      </v-layout>
+    </v-container>
   </v-card>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import { DetailToolbar, ImgCard } from '~/components/ItemDetail';
 
 export default {
   name: 'ItemContainer',
+  components: { DetailToolbar, ImgCard },
   computed: {
     ...mapGetters(['getItem']),
   },

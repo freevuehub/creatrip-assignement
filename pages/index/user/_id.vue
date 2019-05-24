@@ -21,7 +21,7 @@ export default {
   watch: {
     $route(to, from) {
       if (to.params.id !== from.params.id) this.getItems();
-      if (to.query.id !== from.query.id) this.getItem();
+      if (to.query.id) this.getItem();
     },
   },
   async created() {

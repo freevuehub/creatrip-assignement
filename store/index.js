@@ -84,8 +84,34 @@ export const mutations = {
       ...payload.data,
     };
   },
-  SET_EDITING(state) {
-    state.item.editing = !state.item.editing;
+  SET_EDITING(state, payload) {
+    console.log(
+      '%c\n'
+      + '                                         \n'
+      + '   <====== Item Detail Change ======>    \n'
+      + '                                         \n'
+      + '\n',
+      'background: #00afa0; color: #fff; font-weight: bold;',
+      'Before:', state.item,
+      '\n',
+      'After:', {
+        ...state.item,
+        ...payload.data,
+      },
+    );
+
+    state.item = {
+      ...state.item,
+      ...payload.data,
+    };
+
+    state.items = [
+      ...state.items.map(
+        l => l.item_idx === payload.idx
+          ? { ...l, ...payload.data }
+          : l
+      ),
+    ];
   },
 };
 
@@ -116,6 +142,9 @@ export const actions = {
     const list = this.state.items.filter(l => l.item_idx === idx)[0];
 
     commit('SET_ITEM', { data: list });
+  },
+  fetchItemEdit({ commit }, obj) {
+    commit('SET_EDITING', obj);
   },
 };
 
