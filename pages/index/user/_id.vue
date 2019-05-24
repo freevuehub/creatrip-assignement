@@ -4,41 +4,30 @@
     xs12
     class="pa-2"
   >
-    <item-list />
+    <items-container />
   </v-flex>
 </template>
 
 <script>
-import { get } from 'axios';
-import { ItemList } from '~/components';
+import { ItemsContainer } from '~/containers';
 
 export default {
   name: 'ItemListView',
-  middleware: ['setUserToStore'],
-  components: { ItemList },
+  components: { ItemsContainer },
   computed: {
     id: ({ $route }) => parseFloat($route.params.id),
   },
   watch: {
-    $route() {
-      this.getItems();
+    $route(to, from) {
+      if (to.params.id !== from.params.id) this.getItems();
     },
   },
   created() {
     this.getItems();
   },
-  mounted() {
-    console.log(this.$route.query);
-  },
   methods: {
-    async getItems() {
-      const { data } = await get('http://localhost:3000/items.json');
-
-      const list = data.list.filter(
-        l => l.user_idx === this.id
-      )[0].items;
-
-      this.$store.commit('SET_ITEMS', { data: list });
+    getItems() {
+      this.$store.dispatch('fetchItems', this.id);
     },
   },
 };

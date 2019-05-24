@@ -1,6 +1,6 @@
 <template>
   <v-img
-    class="white--text"
+    class="secondary--text"
     height="200px"
     :src="url">
     <span class="headline pa-2">{{ title }}</span>

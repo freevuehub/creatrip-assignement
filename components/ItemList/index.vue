@@ -3,10 +3,8 @@
     flat
     class="pa-2"
   >
-    <v-subheader>
-      User's Items
-    </v-subheader>
-    <template v-for="l in getItems">
+    <list-header label="User's Items" />
+    <template v-for="l in data">
       <list-item
         :data="l"
         :key="l.item_idx"
@@ -22,14 +20,14 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import ListItem from './ListItem';
+import ListHeader from '../ListHeader';
 
 export default {
   name: 'ItemList',
-  components: { ListItem },
-  computed: {
-    ...mapGetters(['getItems']),
+  components: { ListItem, ListHeader },
+  props: {
+    data: Array,
   },
 };
 </script>

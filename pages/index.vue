@@ -9,36 +9,29 @@
         xs12
         class="pa-2"
       >
-        <user-list
-          :style="!mobile && `position: sticky; top: 24px;`"
-          :data="getUsers"
-        />
+        <users-container :style="!mobile && `position: sticky; top: 24px;`" />
       </v-flex>
 
-      <nuxt-child />
+      <nuxt-child v-if="userId" />
+      <item-manual v-else />
     </v-layout>
   </v-container>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import axios from 'axios';
-import { UserList } from '~/components';
+import { ItemManual } from '~/components';
+import { UsersContainer } from '~/containers';
 
 export default {
-  name: 'Main',
+  name: 'MainView',
   layout: 'default',
-  components: { UserList },
+  components: { UsersContainer, ItemManual },
   computed: {
     mobile: ({ $vuetify }) => $vuetify.breakpoint.xs || $vuetify.breakpoint.sm,
-    ...mapGetters(['getUsers']),
+    userId: ({ $route }) => !!$route.params.id,
   },
-  async created() {
-    if (!this.getUsers.length) {
-      const { data } = await axios.get('http://localhost:3000/users.json');
-
-      this.$store.commit('SET_USERS', { data: data.list });
-    }
+  created() {
+    this.$store.dispatch('fetchUsers');
   },
 };
 </script>

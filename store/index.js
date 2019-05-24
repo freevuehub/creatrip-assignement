@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const state = () => ({
   users: [],
   user: {},
@@ -19,7 +21,9 @@ export const mutations = {
       'After:', payload.data,
     );
 
-    state.users = payload.data;
+    state.users = [
+      ...payload.data,
+    ];
   },
   SORT_USERS(state, payload) {
     switch (payload.type) {
@@ -59,60 +63,55 @@ export const mutations = {
       'After:', payload.data,
     );
 
-    state.items = payload.data;
-  },
-  SET_EDITING(state) {
-    state.item.editing = !state.item.editing;
-  },
-  /*
-  SET_USERS(state, payload) {
-    state.users = payload.data;
-  },
-  SET_USER_ITEMS(state, payload) {
-    console.log(payload);
-
-    state.userItems = payload.data;
+    state.items = [
+      ...payload.data,
+    ];
   },
   SET_ITEM(state, payload) {
+    console.log(
+      '%c\n'
+      + '                                   \n'
+      + '   <====== Item Change ======>    \n'
+      + '                                   \n'
+      + '\n',
+      'background: #00afa0; color: #fff; font-weight: bold;',
+      'Before:', state.items,
+      '\n',
+      'After:', payload.data,
+    );
+
     state.item = {
       ...payload.data,
-      editing: false,
     };
-  },
-  SORT_USERS(state, payload) {
-    switch (payload.type) {
-      case 'up':
-        return state.users.sort((prev, next) => prev.name < next.name ? 1 : -1);
-      case 'down':
-        return state.users.sort((prev, next) => prev.name > next.name ? 1 : -1);
-      default:
-        return state.users;
-    }
   },
   SET_EDITING(state) {
     state.item.editing = !state.item.editing;
   },
-  SAVE_ITEM(state, payload) {
-    state.item = {
-      ...state.item,
-      editing: false,
-      name: payload.name,
-    };
-    state.users = state.users.map(l => {
-      if (l.idx === state.item.idx) {
-        l = {
-          ...l,
-          name: payload.name,
-        };
-      }
+};
 
-      return l;
-    });
+export const actions = {
+  async fetchUsers({ commit }) {
+    try {
+      const { data } = await axios.get('http://localhost:3000/users.json');
+
+      commit('SET_USERS', { data: data.list });
+    } catch (e) {
+      console.error('Error', e);
+    }
   },
-  DELETE_USER(state, payload) {
-    state.users = state.users.filter(l => l.idx !== parseInt(payload.idx));
+  async fetchItems({ commit }, idx) {
+    try {
+      const { data } = await axios.get('http://localhost:3000/items.json');
+
+      const list = data.list.filter(
+        l => l.user_idx === idx,
+      )[0].items;
+
+      commit('SET_ITEMS', { data: list });
+    } catch (e) {
+      console.error('Error', e);
+    }
   },
-  */
 };
 
 export const getters = {
