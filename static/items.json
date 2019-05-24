@@ -2,7 +2,6 @@
   "list": [
     {
       "user_idx": 1,
-      "user_name": "Foo",
       "items": [
         {
           "item_idx": 1,
@@ -38,12 +37,10 @@
     },
     {
       "user_idx": 2,
-      "user_name": "Bar",
       "items": []
     },
     {
       "user_idx": 3,
-      "user_name": "Nuxt",
       "items": [
         {
           "item_idx": 1,
@@ -61,7 +58,6 @@
     },
     {
       "user_idx": 4,
-      "user_name": "FreeVue",
       "items": [
         {
           "item_idx": 1,
@@ -85,7 +81,6 @@
     },
     {
       "user_idx": 5,
-      "user_name": "Vue",
       "items": [
         {
           "item_idx": 1,
@@ -97,7 +92,6 @@
     },
     {
       "user_idx": 6,
-      "user_name": "React",
       "items": [
         {
           "item_idx": 1,

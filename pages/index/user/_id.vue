@@ -4,31 +4,34 @@
     xs12
     class="pa-2"
   >
-    <v-card flat class="mb-3">
-      tset
-    </v-card>
+    <user-container />
     <items-container />
   </v-flex>
 </template>
 
 <script>
-import { ItemsContainer } from '~/containers';
+import { ItemsContainer, UserContainer } from '~/containers';
 
 export default {
   name: 'ItemListView',
-  components: { ItemsContainer },
+  components: { ItemsContainer, UserContainer },
   computed: {
     userId: ({ $route }) => parseFloat($route.params.id),
     itemId: ({ $route }) => parseFloat($route.query.id),
   },
   watch: {
     $route(to, from) {
-      if (to.params.id !== from.params.id) this.getItems();
+      if (to.params.id !== from.params.id) {
+        this.getItems();
+        this.getUser();
+      }
       if (to.query.id) this.getItem();
     },
   },
   async created() {
     await this.getItems();
+
+    this.getUser();
 
     if (this.itemId) this.getItem();
   },
@@ -37,6 +40,9 @@ export default {
       return new Promise((resolve) => {
         resolve(this.$store.dispatch('fetchItems', this.userId));
       });
+    },
+    getUser() {
+      this.$store.dispatch('fetchUser', this.userId);
     },
     getItem() {
       this.$store.dispatch('fetchItem', this.itemId);

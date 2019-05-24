@@ -13,21 +13,40 @@
     <v-btn
       block
       color="primary"
+      @click="openItem"
     >
       <v-icon>add</v-icon>
     </v-btn>
+    <v-dialog
+      v-model="addFormDialog"
+      max-width="500"
+    >
+      <add-item-form @closeForm="closeForm" />
+    </v-dialog>
   </v-card>
 </template>
 
 <script>
+import AddItemForm from './AddItemForm';
 import ListItem from './ListItem';
 import ListHeader from '../ListHeader';
 
 export default {
   name: 'ItemList',
-  components: { ListItem, ListHeader },
+  components: { ListItem, ListHeader, AddItemForm },
   props: {
     data: Array,
+  },
+  data: () => ({
+    addFormDialog: false,
+  }),
+  methods: {
+    closeForm() {
+      this.addFormDialog = false;
+    },
+    openItem() {
+      this.addFormDialog = true;
+    },
   },
 };
 </script>

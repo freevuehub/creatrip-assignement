@@ -75,7 +75,7 @@ export const mutations = {
       + '                                   \n'
       + '\n',
       'background: #00afa0; color: #fff; font-weight: bold;',
-      'Before:', state.items,
+      'Before:', state.item,
       '\n',
       'After:', payload.data,
     );
@@ -113,7 +113,40 @@ export const mutations = {
       ),
     ];
   },
+  ADD_ITEM(state, payload) {
+    console.log(
+      '%c\n'
+      + '                               \n'
+      + '   <====== Item Add ======>    \n'
+      + '                               \n'
+      + '\n',
+      'background: #00afa0; color: #fff; font-weight: bold;',
+      'Before:', state.items,
+      '\n',
+      'After:', [
+        ...state.items,
+        payload,
+      ],
+    );
+
+    state.items = [
+      ...state.items,
+      payload,
+    ];
+  },
   DELETE_ITEM(state, payload) {
+    console.log(
+      '%c\n'
+      + '                                  \n'
+      + '   <====== Item Delete ======>    \n'
+      + '                                  \n'
+      + '\n',
+      'background: #00afa0; color: #fff; font-weight: bold;',
+      'Before:', state.items,
+      '\n',
+      'After:', state.items.filter(l => l.item_idx !== payload),
+    );
+
     state.items = state.items.filter(l => l.item_idx !== payload);
   },
 };
@@ -141,10 +174,20 @@ export const actions = {
       console.error('Error', e);
     }
   },
+  fetchUser({ commit }, idx) {
+    const list = this.state.users.filter(l => l.idx === idx)[0];
+
+    commit('SET_USER', { data: list });
+  },
   fetchItem({ commit }, idx) {
     const list = this.state.items.filter(l => l.item_idx === idx)[0];
 
     commit('SET_ITEM', { data: list });
+  },
+  fetchAddItem({ commit }, obj) {
+    let lastIds = this.state.items[this.state.items.length - 1].item_idx;
+
+    commit('ADD_ITEM', { ...obj, item_idx: ++lastIds });
   },
   fetchItemEdit({ commit }, obj) {
     commit('SET_EDITING', obj);
