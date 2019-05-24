@@ -112,6 +112,11 @@ export default {
         item_name: this.title,
         subscript: this.comment,
       });
+
+      this.title = '';
+      this.comment = '';
+      this.url = '';
+      this.imgName = '';
     },
   },
 };

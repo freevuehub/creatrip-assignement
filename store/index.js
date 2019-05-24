@@ -134,6 +134,22 @@ export const mutations = {
       payload,
     ];
   },
+  DELETE_USER(state, payload) {
+    console.log(
+      '%c\n'
+      + '                                  \n'
+      + '   <====== User Delete ======>    \n'
+      + '                                  \n'
+      + '\n',
+      'background: #00afa0; color: #fff; font-weight: bold;',
+      'Before:', state.users,
+      '\n',
+      'After:', state.users.filter(l => l.idx !== payload),
+    );
+
+    state.users = state.users.filter(l => l.idx !== payload);
+    state.items = [];
+  },
   DELETE_ITEM(state, payload) {
     console.log(
       '%c\n'
@@ -153,6 +169,8 @@ export const mutations = {
 
 export const actions = {
   async fetchUsers({ commit }) {
+    if (this.state.users.length) return;
+
     try {
       const { data } = await axios.get('http://localhost:3000/users.json');
 
@@ -185,12 +203,15 @@ export const actions = {
     commit('SET_ITEM', { data: list });
   },
   fetchAddItem({ commit }, obj) {
-    let lastIds = this.state.items[this.state.items.length - 1].item_idx;
+    let lastIds = this.state.items.length ? this.state.items[this.state.items.length - 1].item_idx : 0;
 
     commit('ADD_ITEM', { ...obj, item_idx: ++lastIds });
   },
   fetchItemEdit({ commit }, obj) {
     commit('SET_EDITING', obj);
+  },
+  deleteUser({ commit }, idx) {
+    commit('DELETE_USER', idx);
   },
   deleteItem({ commit }, idx) {
     commit('DELETE_ITEM', idx);

@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card class="pa-4">
     <v-img :src="url"></v-img>
     <v-btn
       icon
