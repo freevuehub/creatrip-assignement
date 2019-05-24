@@ -15,19 +15,28 @@ export default {
   name: 'ItemListView',
   components: { ItemsContainer },
   computed: {
-    id: ({ $route }) => parseFloat($route.params.id),
+    userId: ({ $route }) => parseFloat($route.params.id),
+    itemId: ({ $route }) => parseFloat($route.query.id),
   },
   watch: {
     $route(to, from) {
       if (to.params.id !== from.params.id) this.getItems();
+      if (to.query.id !== from.query.id) this.getItem();
     },
   },
-  created() {
-    this.getItems();
+  async created() {
+    await this.getItems();
+
+    if (this.itemId) this.getItem();
   },
   methods: {
     getItems() {
-      this.$store.dispatch('fetchItems', this.id);
+      return new Promise((resolve) => {
+        resolve(this.$store.dispatch('fetchItems', this.userId));
+      });
+    },
+    getItem() {
+      this.$store.dispatch('fetchItem', this.itemId);
     },
   },
 };

@@ -112,16 +112,24 @@ export const actions = {
       console.error('Error', e);
     }
   },
+  fetchItem({ commit }, idx) {
+    const list = this.state.items.filter(l => l.item_idx === idx)[0];
+
+    commit('SET_ITEM', { data: list });
+  },
 };
 
 export const getters = {
+  getUsers(state) {
+    return state.users;
+  },
+  getUser(state) {
+    return state.user;
+  },
   getItems(state) {
     return state.items;
   },
   getItem(state) {
     return state.item;
-  },
-  getUsers(state) {
-    return state.users;
   },
 };
