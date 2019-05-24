@@ -18,8 +18,20 @@
           md6
           class="pa-2"
         >
-          {{ getItem.item_name }}
-          {{ getItem.subscript }}
+          <detail-content
+            :title="getItem.item_name"
+            :comment="getItem.subscript"
+          />
+          <v-card-actions class="mt-2">
+            <v-spacer></v-spacer>
+            <v-btn
+              color="primary"
+            >Edit</v-btn>
+            <v-btn
+              @click="deleteItem"
+              color="error"
+            >Delete</v-btn>
+          </v-card-actions>
         </v-flex>
       </v-layout>
     </v-container>
@@ -28,13 +40,19 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { DetailToolbar, ImgCard } from '~/components/ItemDetail';
+import { DetailToolbar, ImgCard, DetailContent } from '~/components/ItemDetail';
 
 export default {
   name: 'ItemContainer',
-  components: { DetailToolbar, ImgCard },
+  components: { DetailToolbar, ImgCard, DetailContent },
   computed: {
     ...mapGetters(['getItem']),
+  },
+  methods: {
+    deleteItem() {
+      this.$store.dispatch('deleteItem', parseFloat(this.$route.query.id))
+      this.$router.push(`/user/${this.$route.params.id}`);
+    },
   },
 };
 </script>

@@ -4,6 +4,9 @@
     xs12
     class="pa-2"
   >
+    <v-card flat class="mb-3">
+      tset
+    </v-card>
     <items-container />
   </v-flex>
 </template>

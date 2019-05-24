@@ -11,7 +11,6 @@
       >
         <users-container :style="!mobile && `position: sticky; top: 24px;`" />
       </v-flex>
-
       <nuxt-child v-if="userId" />
       <item-manual v-else />
     </v-layout>

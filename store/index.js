@@ -113,6 +113,9 @@ export const mutations = {
       ),
     ];
   },
+  DELETE_ITEM(state, payload) {
+    state.items = state.items.filter(l => l.item_idx !== payload);
+  },
 };
 
 export const actions = {
@@ -145,6 +148,9 @@ export const actions = {
   },
   fetchItemEdit({ commit }, obj) {
     commit('SET_EDITING', obj);
+  },
+  deleteItem({ commit }, idx) {
+    commit('DELETE_ITEM', idx);
   },
 };
 
